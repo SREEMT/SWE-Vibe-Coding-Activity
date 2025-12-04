@@ -1,0 +1,26 @@
+body {
+font-family: sans-serif;
+text-align: center;
+padding: 20px;
+}
+
+
+.card-slot {
+display: inline-block;
+width: 120px;
+height: 180px;
+border: 2px solid black;
+margin: 10px;
+vertical-align: top;
+font-size: 20px;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+
+button {
+padding: 10px 20px;
+font-size: 18px;
+margin-top: 20px;
+}
