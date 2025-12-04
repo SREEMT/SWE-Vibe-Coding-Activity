@@ -3,6 +3,8 @@ import { createDeck } from "./deck.js";
 
 let playerDeck = [];
 let cpuDeck = [];
+// Holds all cards involved in a WAR
+let warPot = [];
 
 
 function initGame() {
@@ -19,6 +21,7 @@ document.getElementById("result").textContent =
 playerDeck.length === 0 ? "CPU Wins the Game!" : "Player Wins the Game!";
 return;
 }
+
 
 
 const playerCard = playerDeck.shift();
@@ -38,7 +41,11 @@ document.getElementById("result").textContent = "Player wins round";
 cpuDeck.push(playerCard, cpuCard);
 document.getElementById("result").textContent = "CPU wins round";
 } else {
-document.getElementById("result").textContent = "WAR! (not fully implemented)";
+// Tie — move tied cards into warPot
+addToWarPot(playerCard, cpuCard);
+
+document.getElementById("result").textContent = "WAR!";
+logWarPot(); // optional for debugging
 }
 
 
@@ -51,8 +58,28 @@ document.getElementById("counts").textContent =
 `Player: ${playerDeck.length} cards | CPU: ${cpuDeck.length} cards`;
 }
 
+// Add cards to the WAR pot
+function addToWarPot(...cards) {
+  warPot.push(...cards);
+}
+
+// Give pot to winner and clear pot
+function awardWarPotTo(deck) {
+  deck.push(...warPot);
+  warPot = []; // reset pot
+}
+
+// Check pot contents (optional, for debugging)
+function logWarPot() {
+  console.log("WAR POT:", warPot);
+}
+// ends here
+
+
 
 document.getElementById("play-btn").addEventListener("click", playRound);
+
+
 
 
 initGame();
